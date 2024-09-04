@@ -9,6 +9,7 @@ endPageTooltip: str = "Textbook page to stop ripping at"
 doubleCoordsTooltip: str = "Check this if pages are not coming out correctly. My Mac needed it but not my Windows PC."
 outputDirectoryTooltip: str = "Directory to save the PDF to after ripping"
 screenshotDelayTooltip: str = "Use a longer delay if getting a loading screen for screenshots because of slow internet"
+scrollDistanceTooltip: str = "The % of the page that the scraper will scroll down between each screenshot (100%=to bottom of the page)"
 
 # Settings elements for the GUI
 rip_settings = sg.Frame(
@@ -60,6 +61,20 @@ rip_settings = sg.Frame(
         tooltip=screenshotDelayTooltip
       )
     ],
+    [
+      sg.Text("Scroll Distance: ", tooltip=scrollDistanceTooltip),
+      sg.Slider(
+        range=(0, 100),
+        default_value=0,
+        resolution=1,
+        tick_interval=5,
+        orientation="horizontal",
+        disabled=False,
+        key="scroll_distance",
+        expand_x=True,
+        tooltip=scrollDistanceTooltip
+      )
+    ]
   ],
   # Frame layout options
   expand_x=True,
@@ -198,6 +213,7 @@ def DisableAllElements(window: sg.Window):
   window["select_page_change_box"].update(disabled=True)
   window["start_button"].update(disabled=True)
   window["screenshot_delay"].update(disabled=True)
+  window["scroll_distance"].update(disabled=True)
   return
 
 # Enable all elements of the GUI
@@ -210,4 +226,5 @@ def EnableAllElements(window: sg.Window):
   window["select_page_change_box"].update(disabled=False)
   window["start_button"].update(disabled=False)
   window["screenshot_delay"].update(disabled=False)
+  window["scroll_distance"].update(disabled=False)
   return

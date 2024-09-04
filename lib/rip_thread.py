@@ -1,6 +1,6 @@
 # GUI Library
 import PySimpleGUI as sg
-
+import pyautogui as ag
 # Configuration Dataclass
 from lib.config import RipConfiguration
 
@@ -65,6 +65,9 @@ def rip_thread(window: sg.Window, config: RipConfiguration, dev: bool = False):
 
     # Delay to allow page to load before taking screenshot
     sleep(modify_delay_randomly(config.screenshotDelay))
+
+    # Scroll the page by the scroll distance
+    ag.scroll(-(int(config.scrollDistance * 10)))
 
     # Take a screenshot of the page
     if dev:

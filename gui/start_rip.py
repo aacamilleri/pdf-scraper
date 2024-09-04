@@ -143,6 +143,14 @@ def start_rip(window: sg.Window, values, dev: bool = False):
       dev
     )
     return
+  
+  scrollDistance = values["scroll_distance"]
+  if (not isinstance(scrollDistance, float) or scrollDistance < 0):
+    quit_before_rip_with_error_message(
+      window,
+      "Scroll distance must be a positibe float",
+    )
+    return
 
   config = RipConfiguration(
     start_page=start_page,
@@ -152,7 +160,8 @@ def start_rip(window: sg.Window, values, dev: bool = False):
     bottomRightCoords=bottomRightCoords,
     pageSelectionCoords=pageSelectionCoords,
     outputDir=outputDir,
-    screenshotDelay=screenshotDelay
+    screenshotDelay=screenshotDelay,
+    scrollDistance=scrollDistance
   )
   if dev:
     print("\tStarting up ripper thread...")

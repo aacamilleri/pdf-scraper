@@ -11,3 +11,4 @@ class RipConfiguration:
   doubleCoords: bool
   outputDir: str
   screenshotDelay: float
+  scrollDistance: int
