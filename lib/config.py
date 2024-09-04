@@ -8,6 +8,7 @@ class RipConfiguration:
   topLeftCoords: tuple[float, float]
   bottomRightCoords: tuple[float, float]
   pageSelectionCoords: tuple[float, float]
+  scrollSelectionCoords: tuple[float, float]
   doubleCoords: bool
   outputDir: str
   screenshotDelay: float

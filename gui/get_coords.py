@@ -35,7 +35,7 @@ def CoordinateSelectionButtonClickHandler(key: str, dev: bool = False):
   DisableAllElements(window)
 
   # Seconds to count down from before taking the mouse cursor position
-  countdownLength: int = 5
+  countdownLength: int = 3
 
   # Make countdown shorter in dev mode for faster testing
   if dev:

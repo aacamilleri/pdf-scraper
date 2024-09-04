@@ -3,6 +3,7 @@ import PySimpleGUI as sg
 import pyautogui as ag
 # Configuration Dataclass
 from lib.config import RipConfiguration
+from .pagenumbers import moveMouseTo
 
 # Ripper Helper Functions
 from lib.pagenumbers import write_page_number, modify_delay_randomly
@@ -67,6 +68,7 @@ def rip_thread(window: sg.Window, config: RipConfiguration, dev: bool = False):
     sleep(modify_delay_randomly(config.screenshotDelay))
 
     # Scroll the page by the scroll distance
+    moveMouseTo(config.scrollSelectionCoords[0], config.scrollSelectionCoords[1])
     ag.scroll(-(int(config.scrollDistance * 10)))
 
     # Take a screenshot of the page

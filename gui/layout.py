@@ -10,6 +10,7 @@ doubleCoordsTooltip: str = "Check this if pages are not coming out correctly. My
 outputDirectoryTooltip: str = "Directory to save the PDF to after ripping"
 screenshotDelayTooltip: str = "Use a longer delay if getting a loading screen for screenshots because of slow internet"
 scrollDistanceTooltip: str = "The % of the page that the scraper will scroll down between each screenshot (100%=to bottom of the page)"
+pageScrollTooltip: str = "Select the area where the cursor will move to when attempting to scroll the page"
 
 # Settings elements for the GUI
 rip_settings = sg.Frame(
@@ -67,7 +68,7 @@ rip_settings = sg.Frame(
         range=(0, 100),
         default_value=0,
         resolution=1,
-        tick_interval=5,
+        tick_interval=20,
         orientation="horizontal",
         disabled=False,
         key="scroll_distance",
@@ -153,9 +154,26 @@ page_change_box_coordinate_selector = [
       expand_x=True,
       element_justification="center",
     ),
+    sg.Frame( # Buttons to select and display the scroll selector
+      "Scroll Coordinate Selector", # Frame title)
+      [ # Frame content layout
+        [
+            sg.Text("Scroll Area:", tooltip=pageScrollTooltip),
+            sg.Button(
+                "Select Coords",
+                key="select_page_scroll_box",
+                disabled=False,
+                disabled_button_color=("white", "gray"),
+                tooltip=pageScrollTooltip
+          )
+        ],
+      ],
+      expand_y=True,
+      expand_x=True,
+      element_justification="center",
+    ),
   ]
 ]
-
 
 # Create layout of GUI
 layout = [
@@ -165,6 +183,7 @@ layout = [
   [screenshot_area_selector],
   # Page Change Box Coordinate Selector
   [page_change_box_coordinate_selector],
+  # Page Scroll Coordinate Selector
   [sg.HorizontalSeparator()],
   # Error Message and Progress Bar
   [
@@ -211,6 +230,7 @@ def DisableAllElements(window: sg.Window):
   window["select_topleft"].update(disabled=True)
   window["select_bottomright"].update(disabled=True)
   window["select_page_change_box"].update(disabled=True)
+  window["select_page_scroll_box"].update(disabled=True)
   window["start_button"].update(disabled=True)
   window["screenshot_delay"].update(disabled=True)
   window["scroll_distance"].update(disabled=True)
@@ -224,6 +244,7 @@ def EnableAllElements(window: sg.Window):
   window["select_topleft"].update(disabled=False)
   window["select_bottomright"].update(disabled=False)
   window["select_page_change_box"].update(disabled=False)
+  window["select_page_scroll_box"].update(disabled=False)
   window["start_button"].update(disabled=False)
   window["screenshot_delay"].update(disabled=False)
   window["scroll_distance"].update(disabled=False)

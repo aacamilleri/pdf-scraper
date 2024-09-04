@@ -40,6 +40,9 @@ def run(dev: bool = False):
     if event == "select_page_change_box":
       CoordinateSelectionButtonClickHandler("select_page_change_box", dev)
 
+    if event =="select_page_scroll_box":
+      CoordinateSelectionButtonClickHandler("select_page_scroll_box", dev)
+
     # Update countdown on selected coordinate selection button
     if event == "update-button-countdown":
       UpdateCountdown(values["update-button-countdown"][0], values["update-button-countdown"][1])

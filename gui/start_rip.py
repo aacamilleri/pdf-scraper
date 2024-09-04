@@ -92,6 +92,7 @@ def start_rip(window: sg.Window, values, dev: bool = False):
   topLeftCoords = window['select_topleft'].metadata
   bottomRightCoords = window['select_bottomright'].metadata
   pageSelectionCoords = window['select_page_change_box'].metadata
+  scrollSelectionCoords = window['select_page_scroll_box'].metadata
 
   if not is_valid_coords_tuple(topLeftCoords, dev):
     quit_before_rip_with_error_message(
@@ -124,6 +125,14 @@ def start_rip(window: sg.Window, values, dev: bool = False):
       dev
     )
     return
+  
+  if not is_valid_coords_tuple(scrollSelectionCoords, dev):
+    quit_before_rip_with_error_message(
+      window,
+      "Page scroll box coordinates are invalid",
+      dev
+    )
+    return
 
   outputDir: str = values["outputDir"]
 
@@ -148,7 +157,7 @@ def start_rip(window: sg.Window, values, dev: bool = False):
   if (not isinstance(scrollDistance, float) or scrollDistance < 0):
     quit_before_rip_with_error_message(
       window,
-      "Scroll distance must be a positibe float",
+      "Scroll distance must be a positive float",
     )
     return
 
@@ -159,6 +168,7 @@ def start_rip(window: sg.Window, values, dev: bool = False):
     topLeftCoords=topLeftCoords,
     bottomRightCoords=bottomRightCoords,
     pageSelectionCoords=pageSelectionCoords,
+    scrollSelectionCoords=scrollSelectionCoords,
     outputDir=outputDir,
     screenshotDelay=screenshotDelay,
     scrollDistance=scrollDistance
